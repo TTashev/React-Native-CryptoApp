@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState, useRef } from 'react';
 import {Text, TouchableOpacity, View, Image, ScrollView, StyleSheet} from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import BottomSheet, { BottomSheetMethods } from '@devvie/bottom-sheet';
 import {icons, images } from '../resources';
 
 const CryptoCurrency = ({ balance, cryptoCurrency, currency, currencyName, textColor }) => {
@@ -47,6 +48,8 @@ const MainMenu = ({navigation}) => {
     useEffect(() =>{
       getBTCPriceApiAsync()
     },[data])
+
+    const sheetRef = useRef();
   
     return (
       <View 
@@ -101,13 +104,13 @@ const MainMenu = ({navigation}) => {
             padding : 20,
             alignItems : 'center',
             justifyContent: 'space-between',
-            backgroundColor: "#000000",
+            backgroundColor: "#00000000",
           }}>
           <Image
             source={icons.home}
             resizeMode='contain'
           />
-          <TouchableOpacity onPress={() => navigation.navigate('BuySell')}>
+          <TouchableOpacity onPress={() => sheetRef.current?.open()}>
             <Image 
               source={icons.buySell}
               resizeMode='contain'
@@ -117,6 +120,21 @@ const MainMenu = ({navigation}) => {
             source={icons.portfolio}
             resizeMode='contain'
           />
+        </View>
+        <View>
+          <BottomSheet style={styles.bottomSheet} ref={sheetRef}>
+            <View
+              style={{
+                alignItems : 'center',
+                gap : 46,
+              }}>
+              <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}} onPress={() => {navigation.navigate('BuyBtc'); sheetRef.current?.close();}}>Buy</Text>
+              <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>Sell</Text>
+              <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}} onPress={() => {navigation.navigate('Convert'); sheetRef.current?.close();}}>Convert</Text>
+              <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>Deposite</Text>
+              <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>Withdraw</Text>
+            </View>
+          </BottomSheet>
         </View>
       </View>
     );
@@ -133,5 +151,9 @@ const styles = StyleSheet.create({
     downHeader: {
       alignItems: 'center',
       padding: 30,
+    },
+    bottomSheet : {
+      height : '50%',
+      backgroundColor : '#000000CC',
     },
 });

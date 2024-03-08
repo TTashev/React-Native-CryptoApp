@@ -1,4 +1,4 @@
-import {View, Text, Image,StatusBar, SafeAreaView , FlatList, StyleSheet} from 'react-native';
+import {View, Text, Image, StatusBar, SafeAreaView , FlatList, StyleSheet} from 'react-native';
 import Svg, {Line,Rect} from 'react-native-svg';
 import {images} from '../resources';
 
