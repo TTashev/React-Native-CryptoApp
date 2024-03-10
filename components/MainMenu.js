@@ -2,6 +2,7 @@ import React, {useEffect, useMemo, useState, useRef } from 'react';
 import {Text, TouchableOpacity, View, Image, ScrollView, StyleSheet} from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import BottomSheet, { BottomSheetMethods } from '@devvie/bottom-sheet';
+import { debounce } from 'lodash';
 import {icons, images } from '../resources';
 
 const CryptoCurrency = ({ balance, cryptoCurrency, currency, currencyName, textColor }) => {
@@ -26,28 +27,37 @@ const CryptoCurrency = ({ balance, cryptoCurrency, currency, currencyName, textC
     );
   };
 
+
 const MainMenu = ({navigation}) => {
     const [data, setData]=useState([]);
   
     const getBTCPriceApiAsync = async () => {
       try {
         const response = await fetch(
-          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&precision=2',
+          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Ctether%2Cethereum%2Cdogecoin%2Cchainlink%2Cuniswap&vs_currencies=usd&precision=2',
         );
         const json = await response.json();
-        if(json.bitcoin != undefined) {
-           setData(json.bitcoin.usd)
-        }
-        return json.bitcoin;
+
+        setData(json)
+
+        return json;
       } catch (error) {
         setData(error)
         console.error(error);
       }
     }
+
+    const debouncedFetchData = debounce(getBTCPriceApiAsync, 5000);
   
     useEffect(() =>{
       getBTCPriceApiAsync()
-    },[data])
+
+      const intervalId = setInterval(() => {
+        debouncedFetchData();
+      }, 5000);
+
+      return () => clearInterval(intervalId);
+    },[])
 
     const sheetRef = useRef();
   
@@ -89,12 +99,12 @@ const MainMenu = ({navigation}) => {
           />
         </View>
         <ScrollView>
-          <CryptoCurrency balance={JSON.stringify(data) + " USD"} cryptoCurrency={icons.bitcoinLogo} currency="BTC" currencyName="Bitcoin" textColor="#F7931A" />
-          <CryptoCurrency balance="1.85 лв" cryptoCurrency={icons.tetherLogo} currency="USDT" currencyName="Tether" textColor="#00CDCD" />
-          <CryptoCurrency balance="4 045.12 лв" cryptoCurrency={icons.etheriumLogo} currency="ETH" currencyName="Etherum" textColor="#7000FF" />
-          <CryptoCurrency balance="0.22 лв" cryptoCurrency={icons.dogeLogo} currency="DOGE" currencyName="Dogecoin" textColor="#FFD200" />
-          <CryptoCurrency balance="12.49 лв" cryptoCurrency={icons.chainlinkLogo} currency="LINK" currencyName="Chainlink" textColor="#224DDA" />
-          <CryptoCurrency balance="5.51 лв" cryptoCurrency={icons.uniswapLogo} currency="UNI" currencyName="Uniswap" textColor="#FF007A" />
+          <CryptoCurrency balance={JSON.stringify(data.bitcoin.usd) + " USD"} cryptoCurrency={icons.bitcoinLogo} currency="BTC" currencyName="Bitcoin" textColor="#F7931A" />
+          <CryptoCurrency balance={JSON.stringify(data.tether.usd) + " USD"} cryptoCurrency={icons.tetherLogo} currency="USDT" currencyName="Tether" textColor="#00CDCD" />
+          <CryptoCurrency balance={JSON.stringify(data.ethereum.usd) + " USD"} cryptoCurrency={icons.etheriumLogo} currency="ETH" currencyName="Etherum" textColor="#7000FF" />
+          <CryptoCurrency balance={JSON.stringify(data.dogecoin.usd) + " USD"} cryptoCurrency={icons.dogeLogo} currency="DOGE" currencyName="Dogecoin" textColor="#FFD200" />
+          <CryptoCurrency balance={JSON.stringify(data.chainlink.usd) + " USD"} cryptoCurrency={icons.chainlinkLogo} currency="LINK" currencyName="Chainlink" textColor="#224DDA" />
+          <CryptoCurrency balance={JSON.stringify(data.uniswap.usd) + " USD"} cryptoCurrency={icons.uniswapLogo} currency="UNI" currencyName="Uniswap" textColor="#FF007A" />
         </ScrollView>
         <View
           style={{
