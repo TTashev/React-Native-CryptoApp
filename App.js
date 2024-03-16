@@ -11,7 +11,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown : false}}>
-        <Stack.Screen name="Main" component={MainMenu} options={{title: 'Welcome'}} />
+        <Stack.Screen name="Main" component={MainMenu} />
         <Stack.Screen name="BuyBtc" component={BuyBtcMenu} />
         <Stack.Screen name="Convert" component={ConvertMenu} />
       </Stack.Navigator>

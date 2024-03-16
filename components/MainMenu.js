@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo, useState, useRef } from 'react';
 import {Text, TouchableOpacity, View, Image, ScrollView, StyleSheet} from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { BlurView } from 'expo-blur';
 import BottomSheet, { BottomSheetMethods } from '@devvie/bottom-sheet';
 import { debounce } from 'lodash';
 import {icons, images } from '../resources';
@@ -29,7 +30,7 @@ const CryptoCurrency = ({ balance, cryptoCurrency, currency, currencyName, textC
 
 
 const MainMenu = ({navigation}) => {
-    const [data, setData]=useState([]);
+    const [data, setData]=useState([null]);
   
     const getBTCPriceApiAsync = async () => {
       try {
@@ -53,8 +54,8 @@ const MainMenu = ({navigation}) => {
       getBTCPriceApiAsync()
 
       const intervalId = setInterval(() => {
-        debouncedFetchData();
-      }, 5000);
+        getBTCPriceApiAsync();
+      }, 20000);
 
       return () => clearInterval(intervalId);
     },[])
@@ -64,57 +65,66 @@ const MainMenu = ({navigation}) => {
     return (
       <View 
         style={{
-          width : "100%",
-          height : "100%",
+          flex : 1,
           backgroundColor: "black",
-      }}>
+        }}>
         <View
           style={{
-            paddingTop : 74,
-            flexDirection : 'row',
+            flex : 2,
+            backgroundColor : 'green',
           }}>
-          <Text style={{fontSize : 20, paddingLeft : 21,  fontWeight: '700', color: '#FFFFFF'}}>@Dinko</Text>
-          <Text style={{fontSize : 18, paddingLeft : 40, fontWeight: '700', color: '#6AF25F'}}>Total Wealth</Text>
-          <Image
-            style={{paddingLeft : 180}}
-            source={icons.Bell}
-            resizeMode='contain'
-          />
+          <Text style={{fontSize : 18, textAlign: 'center', fontWeight: '700', color: '#6AF25F'}}>Total Wealth</Text>
+          <View
+            style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+            }}>
+            <Text style={{fontSize : 20, textAlign: 'left', fontWeight: '700', color: '#FFFFFF'}}>@Dinko</Text>
+          </View>
+          <View
+            style={{
+              alignItems : "flex-end",
+              position: 'absolute',
+              top: 0,
+              right: 0,
+            }}>
+            <Image
+              source={icons.Bell}
+              resizeMode='contain'
+            />
+          </View>
         </View>
         <View
           style={{
-            paddingTop : 3,
+            flex : 9,
             alignItems : 'center',
-          }}>
-          <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFF'}}>5 712,32 лв</Text>
-        </View>
-        <View
-          style={{
-            alignItems : 'center',
+            backgroundColor : 'blue',
           }}>
           <Image 
             source={images.chartGreen}
             resizeMode='contain'
             style={styles.downHeader}
           />
+          <ScrollView
+            style={{
+              flexGrow : 5,
+            }}>
+            <CryptoCurrency balance={JSON.stringify(data.bitcoin && data.bitcoin.usd) + " USD"} cryptoCurrency={icons.bitcoinLogo} currency="BTC" currencyName="Bitcoin" textColor="#F7931A" />
+            <CryptoCurrency balance={JSON.stringify(data.tether && data.tether.usd) + " USD"} cryptoCurrency={icons.tetherLogo} currency="USDT" currencyName="Tether" textColor="#00CDCD" />
+            <CryptoCurrency balance={JSON.stringify(data.ethereum && data.ethereum.usd) + " USD"} cryptoCurrency={icons.etheriumLogo} currency="ETH" currencyName="Etherum" textColor="#7000FF" />
+            <CryptoCurrency balance={JSON.stringify(data.dogecoin && data.dogecoin.usd) + " USD"} cryptoCurrency={icons.dogeLogo} currency="DOGE" currencyName="Dogecoin" textColor="#FFD200" />
+            <CryptoCurrency balance={JSON.stringify(data.chainlink && data.chainlink.usd) + " USD"} cryptoCurrency={icons.chainlinkLogo} currency="LINK" currencyName="Chainlink" textColor="#224DDA" />
+            <CryptoCurrency balance={JSON.stringify(data.uniswap && data.uniswap.usd) + " USD"} cryptoCurrency={icons.uniswapLogo} currency="UNI" currencyName="Uniswap" textColor="#FF007A" />
+          </ScrollView>
         </View>
-        <ScrollView>
-          <CryptoCurrency balance={JSON.stringify(data.bitcoin.usd) + " USD"} cryptoCurrency={icons.bitcoinLogo} currency="BTC" currencyName="Bitcoin" textColor="#F7931A" />
-          <CryptoCurrency balance={JSON.stringify(data.tether.usd) + " USD"} cryptoCurrency={icons.tetherLogo} currency="USDT" currencyName="Tether" textColor="#00CDCD" />
-          <CryptoCurrency balance={JSON.stringify(data.ethereum.usd) + " USD"} cryptoCurrency={icons.etheriumLogo} currency="ETH" currencyName="Etherum" textColor="#7000FF" />
-          <CryptoCurrency balance={JSON.stringify(data.dogecoin.usd) + " USD"} cryptoCurrency={icons.dogeLogo} currency="DOGE" currencyName="Dogecoin" textColor="#FFD200" />
-          <CryptoCurrency balance={JSON.stringify(data.chainlink.usd) + " USD"} cryptoCurrency={icons.chainlinkLogo} currency="LINK" currencyName="Chainlink" textColor="#224DDA" />
-          <CryptoCurrency balance={JSON.stringify(data.uniswap.usd) + " USD"} cryptoCurrency={icons.uniswapLogo} currency="UNI" currencyName="Uniswap" textColor="#FF007A" />
-        </ScrollView>
         <View
           style={{
-            width : "100%",
-            height : 102,
+            flex : 0.5,
             flexDirection: 'row',
-            padding : 20,
+            padding : "5%",
             alignItems : 'center',
             justifyContent: 'space-between',
-            backgroundColor: "#00000000",
           }}>
           <Image
             source={icons.home}
@@ -160,7 +170,6 @@ const styles = StyleSheet.create({
     },
     downHeader: {
       alignItems: 'center',
-      padding: 30,
     },
     bottomSheet : {
       height : '50%',
