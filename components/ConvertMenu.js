@@ -1,5 +1,6 @@
 import {View, Text, Image, StatusBar, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
 import Svg, {Line,Rect} from 'react-native-svg';
+import NextBtn from "../assets/svg/NextBtn"
 const {width,height} = Dimensions.get('window')
 
 const ConvertMenu = ({navigation}) => {
@@ -72,22 +73,11 @@ const ConvertMenu = ({navigation}) => {
                 </Svg>
               </View>
               <View
-                style={[
-                  StyleSheet.absoluteFill,
-                  { paddingTop : "95%", alignItems: 'center'},
-                ]}>
-                <Svg height="100%" width="100%" viewBox="0 0 270 51">
-                  <Rect
-                    rx="25"
-                    ry="25"
-                    width="270"
-                    height="51"
-                    stroke="#343434"
-                    strokeWidth="1"
-                    fill="#484A74"
-                  />
-                  <Text style={{textAlign: 'center', fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>Next</Text>
-                </Svg>
+                style={{
+                  alignItems: 'center',
+                  paddingTop : "20%",
+                }}>
+                <NextBtn />
               </View>
           </View>
           <View

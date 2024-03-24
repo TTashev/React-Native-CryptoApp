@@ -73,12 +73,12 @@ const MainMenu = ({navigation}) => {
             flex : 2,
             backgroundColor : 'green',
           }}>
-          <Text style={{fontSize : 18, textAlign: 'center', fontWeight: '700', color: '#6AF25F'}}>Total Wealth</Text>
+          <Text style={{fontSize : 18, top: "20%", textAlign: 'center', fontWeight: '700', color: '#6AF25F'}}>Total Wealth</Text>
           <View
             style={{
               position: 'absolute',
-              left: 0,
-              top: 0,
+              left: "5%",
+              top: "20%",
             }}>
             <Text style={{fontSize : 20, textAlign: 'left', fontWeight: '700', color: '#FFFFFF'}}>@Dinko</Text>
           </View>
@@ -86,8 +86,8 @@ const MainMenu = ({navigation}) => {
             style={{
               alignItems : "flex-end",
               position: 'absolute',
-              top: 0,
-              right: 0,
+              right: "5%",
+              top: "20%",
             }}>
             <Image
               source={icons.Bell}
