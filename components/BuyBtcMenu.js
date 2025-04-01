@@ -4,12 +4,9 @@ import {images} from '../resources';
 
 const BuyBtcMenu = ({navigation}) => {
     return (
-      <SafeAreaView
-        backgroundColor="blue">
         <View
           style={{
-            width : '100%',
-            height : '100%',
+            flex : 1,
             backgroundColor : 'black',
           }}>
             <StatusBar
@@ -18,20 +15,22 @@ const BuyBtcMenu = ({navigation}) => {
             />
             <View
               style={{
-                paddingTop : 120,
-                gap : 10,
+                flex : 3,
+                backgroundColor : 'green',
+                justifyContent: 'center',
                 flexDirection: 'row',
-                justifyContent : "center",
-                backgroundColor : 'black',
               }}>
-              <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>Buy</Text>
-              <Image 
+              <Text style={{fontSize : 25, paddingTop : '30%', fontWeight: '700', color: '#FFFFFFFF'}}>Buy</Text>
+              <Image
+                style={{
+                  resizeMode: 'contain',
+                  paddingTop : '70%',
+                }}
                 source={images.buyBtc}
-                resizeMode='contain'
               />
-              <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>BTC</Text>
+              <Text style={{fontSize : 25, paddingTop : '30%', fontWeight: '700', color: '#FFFFFFFF'}}>BTC</Text>
             </View>
-            <View
+            {/* <View
               style={{
                 paddingTop : 56,
                 flexDirection: 'row',
@@ -48,8 +47,8 @@ const BuyBtcMenu = ({navigation}) => {
               }}>
               <Text style={{fontSize : 16, fontWeight: '700', color: '#FFFFFFFF'}}>Order type</Text>
               <Text style={{fontSize : 16, fontWeight: '400', color: '#FFFFFFFF'}}>Buy now {`>`}</Text>
-            </View>
-            <View
+            </View> */}
+            {/* <View
               style={{
                 flexDirection: 'row',
                 gap : 158,
@@ -76,13 +75,17 @@ const BuyBtcMenu = ({navigation}) => {
                 />
                 <Text style={{textAlign: 'center', fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>Next</Text>
               </Svg>
-            </View>
+            </View> */}
+            <View
+            style={{
+              flex : 2,
+              backgroundColor : 'red',
+            }}>
             <View
               style={{
-                paddingTop : 100,
-                paddingLeft : 29,
-                gap : 40,
                 flexDirection: 'row',
+                justifyContent : 'space-between',
+                paddingHorizontal : "5%",
               }}>
               <Text style={{fontSize : 22, fontWeight: '700', color: '#FFFFFFFF'}}>20 лв</Text>
               <Text style={{fontSize : 22, fontWeight: '700', color: '#FFFFFFFF'}}>50 лв</Text>
@@ -92,9 +95,10 @@ const BuyBtcMenu = ({navigation}) => {
             <View
               style={{
                 flexDirection: 'row',
-                paddingTop : 30,
-                gap : 126,
-                justifyContent : "center",
+                justifyContent : 'space-between',
+                paddingTop : "10%",
+                paddingVertical : "3%",
+                paddingHorizontal : "12%",
               }}>
               <Text style={{fontSize : 30, fontWeight: '700', color: '#FFFFFFFF'}}>1</Text>
               <Text style={{fontSize : 30, fontWeight: '700', color: '#FFFFFFFF'}}>2</Text>
@@ -103,9 +107,9 @@ const BuyBtcMenu = ({navigation}) => {
             <View
               style={{
                 flexDirection: 'row',
-                gap : 126,
-                paddingTop : 25,
-                justifyContent : "center",
+                justifyContent : 'space-between',
+                paddingVertical : "3%",
+                paddingHorizontal : "12%",
               }}>
               <Text style={{fontSize : 30, fontWeight: '700', color: '#FFFFFFFF'}}>4</Text>
               <Text style={{fontSize : 30, fontWeight: '700', color: '#FFFFFFFF'}}>5</Text>
@@ -114,9 +118,9 @@ const BuyBtcMenu = ({navigation}) => {
             <View
               style={{
                 flexDirection: 'row',
-                gap : 126,
-                paddingTop : 25,
-                justifyContent : "center",
+                justifyContent : 'space-between',
+                paddingVertical : "3%",
+                paddingHorizontal : "12%",
               }}>
               <Text style={{fontSize : 30, fontWeight: '700', color: '#FFFFFFFF'}}>7</Text>
               <Text style={{fontSize : 30, fontWeight: '700', color: '#FFFFFFFF'}}>8</Text>
@@ -125,16 +129,16 @@ const BuyBtcMenu = ({navigation}) => {
             <View
               style={{
                 flexDirection: 'row',
-                gap : 126,
-                paddingTop : 25,
-                paddingLeft : 62,
+                justifyContent : 'space-between',
+                paddingVertical : "3%",
+                paddingHorizontal : "12%",
               }}>
               <Text style={{fontSize : 30, fontWeight: '700', color: '#FFFFFFFF'}}>.</Text>
-              <Text style={{fontSize : 30, fontWeight: '700', color: '#FFFFFFFF'}}>0</Text>
+              <Text style={{fontSize : 30, paddingLeft : "5%", fontWeight: '700', color: '#FFFFFFFF'}}>0</Text>
               <Text style={{fontSize : 30, fontWeight: '700', color: '#FFFFFFFF'}}>{`<-`}</Text>
             </View>
+          </View>
         </View>
-      </SafeAreaView>
     );
   };
 

@@ -136,10 +136,12 @@ const MainMenu = ({navigation}) => {
               resizeMode='contain'
             />
           </TouchableOpacity>
-          <Image 
-            source={icons.portfolio}
-            resizeMode='contain'
-          />
+          <TouchableOpacity  onPress={() =>  {navigation.navigate('Portfolio');}}>
+            <Image
+              source={icons.portfolio}
+              resizeMode='contain'
+            />
+          </TouchableOpacity>
         </View>
         <View>
           <BottomSheet style={styles.bottomSheet} ref={sheetRef}>

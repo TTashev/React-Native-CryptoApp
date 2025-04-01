@@ -16,7 +16,7 @@ const BuySellMenu = ({navigation}) => {
           <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}} onPress={() => navigation.navigate('BuyBtc')}>Buy</Text>
           <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>Sell</Text>
           <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}} onPress={() => navigation.navigate('Convert')}>Convert</Text>
-          <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>Deposite</Text>
+          <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>Deposit</Text>
           <Text style={{fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>Withdraw</Text>
         </View>
       </SafeAreaView>
