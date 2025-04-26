@@ -30,52 +30,6 @@ const BuyBtcMenu = ({navigation}) => {
               />
               <Text style={{fontSize : 25, paddingTop : '30%', fontWeight: '700', color: '#FFFFFFFF'}}>BTC</Text>
             </View>
-            {/* <View
-              style={{
-                paddingTop : 56,
-                flexDirection: 'row',
-                justifyContent : "center",
-              }}>
-              <Text style={{fontSize : 40, fontWeight: '700', color: '#FFFFFFFF'}}>50,00 лв</Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                gap : 206,
-                paddingTop : 60,
-                paddingLeft : 28,
-              }}>
-              <Text style={{fontSize : 16, fontWeight: '700', color: '#FFFFFFFF'}}>Order type</Text>
-              <Text style={{fontSize : 16, fontWeight: '400', color: '#FFFFFFFF'}}>Buy now {`>`}</Text>
-            </View> */}
-            {/* <View
-              style={{
-                flexDirection: 'row',
-                gap : 158,
-                paddingTop : 30,
-                paddingLeft : 28,
-              }}>
-              <Text style={{fontSize : 16, fontWeight: '700', color: '#FFFFFFFF'}}>Pay With</Text>
-              <Text style={{fontSize : 16, fontWeight: '400', color: '#FFFFFFFF'}}>balance 07.03 лв {`>`}</Text>
-            </View>
-            <View
-              style={[
-                StyleSheet.absoluteFill,
-                { paddingTop : 450, alignItems: 'center'},
-              ]}>
-              <Svg height="50%" width="50%" viewBox="0 20 270 51">
-                <Rect
-                  rx="25"
-                  ry="25"
-                  width="270"
-                  height="51"
-                  stroke="#343434"
-                  strokeWidth="1"
-                  fill="#0029FF0D"
-                />
-                <Text style={{textAlign: 'center', fontSize : 25, fontWeight: '700', color: '#FFFFFFFF'}}>Next</Text>
-              </Svg>
-            </View> */}
             <View
             style={{
               flex : 2,

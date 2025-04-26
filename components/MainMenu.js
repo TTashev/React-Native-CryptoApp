@@ -1,8 +1,9 @@
 import React, {useEffect, useMemo, useState, useRef } from 'react';
-import {Text, TouchableOpacity, View, Image, ScrollView, StyleSheet} from 'react-native';
+import {Text, TouchableOpacity, View, Dimensions, Image, ScrollView, StyleSheet} from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { BlurView } from 'expo-blur';
 import BottomSheet, { BottomSheetMethods } from '@devvie/bottom-sheet';
+import { LineChart } from "react-native-chart-kit";
 import { debounce } from 'lodash';
 import {icons, images } from '../resources';
 
@@ -101,10 +102,29 @@ const MainMenu = ({navigation}) => {
             alignItems : 'center',
             backgroundColor : 'blue',
           }}>
-          <Image 
-            source={images.chartGreen}
-            resizeMode='contain'
-            style={styles.downHeader}
+          <LineChart
+            data={{
+              datasets: [{ data: [5, 20, 45, 28, 80, 99, 43, 87, 120, 55, 90, 130, 180, 210, 260] }],
+            }}
+            width={Dimensions.get("window").width}
+            height={220}
+            withDots={false}
+            withShadow={false}
+            withInnerLines={false}
+            withOuterLines={false}
+            withVerticalLabels={false}
+            withHorizontalLabels={false}
+            chartConfig={{
+            backgroundGradientFrom: "#000000", // blue start
+            backgroundGradientTo: "#000000",   // blue end
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            }}
+            style={{
+              marginVertical: 8,
+              paddingRight: 0,
+              paddingLeft: 0,
+              // borderRadius: 16,
+            }}
           />
           <ScrollView
             style={{
